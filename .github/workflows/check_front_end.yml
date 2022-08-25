@@ -1,0 +1,21 @@
+name: CheckFrontEnd
+
+on: [push]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - uses: c-hive/gha-yarn-cache@v2
+        with:
+          persist-credentials: false
+      - name: Install node modules
+        run: yarn install
+      - name: lint
+        run: yarn lint
